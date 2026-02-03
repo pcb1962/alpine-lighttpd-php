@@ -19,12 +19,22 @@ RUN apk --update add \
     php-gettext \
     php-ldap \
     php-ctype \
-    php-dom && \
+    php-dom \
+		php-mbstring \
+		php-intl \
+		php-fileinfo \
+		php-mysqli \
+		php-xmlreader \
+		imagemagick \
+		shadow \
+		bash && \
     rm -rf /var/cache/apk/*
 
 ADD lighttpd.conf /etc/lighttpd/lighttpd.conf
-RUN mkdir -p /run/lighttpd/ && \
-    chown www-data: /run/lighttpd/
+RUN usermod -u 33 www-data && \
+		groupmod -g 33 www-data && \
+		mkdir -p /run/lighttpd/ && \
+    chown www-data:www-data /run/lighttpd/
 
 EXPOSE 80
 VOLUME /var/www
