@@ -26,6 +26,9 @@ RUN apk --update add \
 		php-mysqli \
 		php-xmlreader \
 		imagemagick \
+		ghostscript \
+		xpdf \
+		poppler-utils \
 		shadow \
 		bash && \
     rm -rf /var/cache/apk/*
