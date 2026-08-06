@@ -25,6 +25,7 @@ RUN apk --update add \
 		php-fileinfo \
 		php-mysqli \
 		php-xmlreader \
+		php84-openssl \
 		imagemagick \
 		ghostscript \
 		xpdf \
