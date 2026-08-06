@@ -7,13 +7,13 @@ tasks:
   build:
     desc: Build for Docker Hub
     cmds:
-      - docker buildx build -t alastairhm/alpine-lighttpd-php:latest ./
+      - docker buildx build -t pcb1962/alpine-lighttpd-php:latest ./
     silent: true
   push:
     desc: Push to Docker Hub
     cmds:
-      - docker push alastairhm/alpine-lighttpd-php:latest
+      - docker push pcb1962/alpine-lighttpd-php:latest
     silent: true
   test:
     desc: Test Image
-      - docker run --name "my-lighttpd-php" --rm -p 8000:80 -v $(pwd):/var/www alastairhm/alpine-lighttpd-php
+      - docker run --name "my-lighttpd-php" --rm -p 8000:80 -v $(pwd):/var/www pcb1962/alpine-lighttpd-php

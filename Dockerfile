@@ -34,14 +34,14 @@ RUN apk --update add \
 		bash && \
     rm -rf /var/cache/apk/*
 
-ADD lighttpd.conf /etc/lighttpd/lighttpd.conf
-RUN usermod -u 33 www-data && \
-		groupmod -g 33 www-data && \
+COPY lighttpd.conf /etc/lighttpd/lighttpd.conf
+RUN usermod -u 33 lighttpd && \
+		groupmod -g 33 lighttpd && \
 		mkdir -p /run/lighttpd/ && \
-    chown www-data:www-data /run/lighttpd/
+    chown lighttpd: /run/lighttpd/
 
 EXPOSE 80
 VOLUME /var/www
 
-CMD php-fpm -D && lighttpd -D -f /etc/lighttpd/lighttpd.conf
+CMD ["/usr/bin/lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
 
