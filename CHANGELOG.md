@@ -8,7 +8,37 @@ Dates in this file are in format of YYYY-MM-DD (2019-12-13 means 13th of Decembe
 
 ## [Unreleased]
 
+* Link the [php2shell blog post](https://blog.0x32.co.uk/posts/php2shell-alpine-lighttpd-php/) from the README
+
+## [[3.23.5]](https://github.com/alastairhm/alpine-lighttpd-php/releases/tag/3.23.5) - 2026-10-22
+
 * Woodpecker CI pipeline testing
+
+### Security
+
+* Build PHP 8.4.27 from Alpine's `php84` APKBUILD to fix php2shell (CVE-2026-109618, CVE-2026-109619), until Alpine 3.23 ships a patched package ([#5](https://github.com/alastairhm/alpine-lighttpd-php/issues/5))
+
+### Fixed
+
+* GitHub Actions no longer pushes pull request builds to `ghcr.io/...:latest`; PRs now only build, tagged `pr-<number>`
+* Removed dead `php-fpm -D &&` from the container `CMD`: the `php-fpm` package
+  was never installed, so the container crashed on every start before
+  lighttpd even launched. PHP is served via lighttpd's own `mod_fastcgi`
+  spawning `php-cgi` (see `mod_fastcgi.conf`), so `php-fpm` was unnecessary.
+* Switched `chown`/`server.username`/`server.groupname` from `www-data` to
+  `lighttpd`, matching the base `alpine-lighttpd` image's package-provided
+  user (the base image no longer creates a `www-data` account)
+* Restored the `mod_access` dotfile/dot-directory deny rule in
+  `lighttpd.conf`, which this image's own conf file was silently dropping
+  from the base image
+* Use `COPY` instead of `ADD` for a local file
+* Moved `index.php` into `html/` and updated README/Taskfile volume-mount
+  examples to avoid serving the whole mounted directory verbatim
+
+### Removed
+
+* `php-imap`: Alpine has no PHP 8.4 package, and the PHP 8.3 extension it installed was never loaded
+* `php-json`: built into PHP 8.4
 
 ## [[3.23.0]](https://github.com/alastairhm/alpine-lighttpd-php/releases/tag/3.23.0) - 2025-12-07
 

@@ -81,10 +81,10 @@ RUN usermod -u 33 lighttpd && \
 		mkdir -p /run/lighttpd/ && \
     chown lighttpd: /run/lighttpd/
 
-EXPOSE 80 443
+EXPOSE 80
+EXPOSE 443
 VOLUME /var/www
 
-#CMD ["/usr/bin/lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
 # lighttpd spawns php-cgi itself via mod_fastcgi
 CMD ["/usr/sbin/lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
 
