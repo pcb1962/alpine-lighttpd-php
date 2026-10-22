@@ -14,4 +14,5 @@ jobs:
           docker build . -t pcb1962/alpine-lighttpd-php:latest
       - name: publish
         run: |
+          docker login -u pcb1962 -p ${{ secrets.DOCKERHUB_TOKEN }}
           docker push pcb1962/alpine-lighttpd-php:latest 
