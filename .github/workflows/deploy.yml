@@ -4,11 +4,6 @@ name: Deploy Docker
 on:
   workflow_dispatch:
     
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]    
-
 jobs:
   Deploy:
     runs-on: ubuntu-latest
