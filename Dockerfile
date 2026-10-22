@@ -68,6 +68,7 @@ RUN apk --update add --repository /tmp/php-pkgs \
 		ghostscript \
 		xpdf \
 		poppler-utils \
+		py3-pygments \
 		shadow \
 		bash && \
     php-cgi84 -v | grep -q "^PHP $PHP_VERSION " && \
