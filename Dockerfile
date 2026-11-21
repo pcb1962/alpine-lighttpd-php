@@ -34,7 +34,8 @@ RUN sed -i \
     echo "$PHP_SHA256  /var/cache/distfiles/php-$PHP_VERSION.tar.xz" | sha256sum -c - && \
     abuild -r
 
-FROM alastairhm/alpine-lighttpd:latest
+#FROM alastairhm/alpine-lighttpd:latest
+FROM alpine:3.23
 
 ARG PHP_VERSION=8.4.28
 
@@ -42,6 +43,8 @@ COPY --from=php-build /home/builder/packages/community /tmp/php-pkgs
 COPY --from=php-build /home/builder/.abuild/*.rsa.pub /etc/apk/keys/
 
 RUN apk --update add --repository /tmp/php-pkgs \
+		lighttpd \
+		ca-certificates \
     php84-common \
     php84-iconv \
     php84-gd \
